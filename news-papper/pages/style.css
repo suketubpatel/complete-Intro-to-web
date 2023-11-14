@@ -1,3 +1,114 @@
 * {
     box-sizing: border-box;
 }
+
+@font-face {        /*Fonts for main heading*/
+    font-family: myHeadingFamily;
+    src: url(../../fonts/snell-roundhand/SnellBT-Regular.otf);
+}
+
+@font-face {        /*Fonts for links*/
+    font-family: myLinkFamily;
+    src: url(../../fonts/futura/Futura\ Medium.otf);
+}
+
+body {
+    padding: 30px;
+}
+
+h1 {
+    font-family: myHeadingFamily;
+    text-align: center;
+    font-size: 60px;
+    font-weight: normal;
+}
+
+.nav-links {
+    
+    border: 3px solid black;
+    margin: 0;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.section-link {
+    font-family: "myLinkFamily";
+    font-size: 25px;
+    font-weight: bolder;
+    text-decoration: none;
+    color: #666;
+}
+
+.section-link:hover {
+    text-decoration: underline;
+}
+
+.nav-links {
+    grid-area: nav;
+}
+
+.brand-header {
+    grid-area: header;
+}
+
+.story-1 {
+    grid-area: story-1;
+}
+
+.story-2 {
+    grid-area: story-2;
+}
+
+.story-3 {
+    grid-area: story-3;
+    border-right: 3px solid black;
+}
+
+.story-4 {
+    grid-area: story-4;
+}
+
+.story-5 {
+    grid-area: story-5;
+    border-right: 3px solid black;
+}
+
+.page {
+    display: grid;
+    grid-template-areas: 
+        "header     header      header"
+        "nav        nav         nav"
+        "story-1    story-2     story-3"
+        "story-4    story-5     story-5";
+}
+
+.story {
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    padding: 10px;
+}
+
+.article-title {
+    font-weight: normal;
+    font-style: italic;
+    text-align: center;
+    font-size: 20px;
+}
+
+.article-text {
+    font-weight: normal;
+    padding: 10px;
+    margin: 5px;
+}
+
+.article-img {
+    display: block;
+    margin: 0 auto;
+    max-height: 250px;
+}
