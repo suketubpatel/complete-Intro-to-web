@@ -9,13 +9,21 @@ Some notes:
 ![plot](../coffee-master/images/coffee_masters.png)
 
 You get to do the HTML and the CSS here.
+
 The logo for Coffee Masters is here.
+
 We didn't talk about how to make rounded corners. It's with border-radius.
+
 There are many ways to do this. Flex and grid would work well, just don't go overboard with grid, it'd be hard to 100% handle this layout in just grid.
+
 HTML inputs can be styled with HTML just as you expect.
+
 We also didn't talk about box shadows. You can give it the nice little shadow effect with the CSS property box-shadow.
+
 I took about 100 lines of HTML and 150 lines of CSS. Again, you do not need to do it the way I did. There are infinite correct ways to do this.
+
 I ended up using grid and flex in different places. Neither is required but can make some parts easier.
+
 You don't have to match the design perfectly. Just get the general style close.
 
 Good Luck!
