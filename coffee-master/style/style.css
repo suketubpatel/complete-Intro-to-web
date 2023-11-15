@@ -107,7 +107,7 @@ body {
     grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas: 
         "item-quantity item-description item-price"
-        ". item-options item-options";
+        "item-quantity item-options item-price";
 }
 
 .no-border {
@@ -155,7 +155,7 @@ body {
 }
 
 .user-input {
-    background-color: #eee1d5;
+    background-color: rgba(0,0,0,0);       /*Makes it transparent*/
     border-radius: 20px;
     border: 2px solid #885a2d;
     padding: 12px;
