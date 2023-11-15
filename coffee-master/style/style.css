@@ -65,6 +65,55 @@ body {
     grid-area: td-heading;
 }
 
+
+.item-quantity {
+    grid-area: item-quantity;
+}
+
+.item-description {
+    grid-area: item-description;
+}
+
+.item-price {
+    grid-area: item-price;
+    text-align: right;
+}
+
+.items-ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.item-options {
+    grid-area: item-options;
+    padding-left: 0;
+}
+
+.box-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-options-list {
+    list-style: none;
+}
+
+.item {
+    border-bottom: 2px solid #DDB892;
+    display: grid;
+
+    padding: 10px 0;
+
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-areas: 
+        "item-quantity item-description item-price"
+        ". item-options item-options";
+}
+
+.no-border {
+    border-bottom: none;
+}
+
 .box-name-payment {
     display: flex;
     flex-direction: column;
