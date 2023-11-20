@@ -44,7 +44,7 @@
 }
 
 .gray {
-    background-color: rgb(202, 202, 202);
+    background-color: rgb(230, 230, 230);
 }
 
 .gray:hover {
@@ -54,7 +54,7 @@
 .orange {
     background-color: rgb(234, 158, 51);
     color: white;
-    font-weight: bold;
+    font-weight: 300;
 }
 
 .orange:hover {
