@@ -10,39 +10,41 @@
     <div class="calculator">
         <div class="row-display">0</div>
 
-        <div class="rows row-first">
-            <button class="gray buttons clear">C</button>
-            <button class="gray buttons back">&larr;</button>
-            <button class="orange buttons divide">&#247</button>
-        </div>
-        
-        <div class="rows row-second">
-            <button class="gray buttons seven">7</button>
-            <button class="gray buttons eight">8</button>
-            <button class="gray buttons nine">9</button>
-            <button class="orange buttons multi">x</button>
-        </div>
-        
-        <div class="rows row-third">
-            <button class="gray buttons four">4</button>
-            <button class="gray buttons five">5</button>
-            <button class="gray buttons six">6</button>
-            <button class="orange buttons minus">-</button>
-        </div>
-        
-        <div class="rows row-four">
-            <button class="gray buttons one">1</button>
-            <button class="gray buttons two">2</button>
-            <button class="gray buttons three">3</button>
-            <button class="orange buttons plus">+</button>
-        </div>
+        <div class="all-buttons">
+            <div class="rows row-first">
+                <button class="gray buttons" id="clear">C</button>
+                <button class="gray buttons" id="black">&larr;</button>
+                <button class="orange buttons" id="divide">&#247</button>
+            </div>
 
-        <div class="rows row-five">
-            <button class="gray buttons zero">0</button>
-            <button class="orange buttons equal">=</button>
+            <div class="rows row-second">
+                <button class="gray buttons" id="seven">7</button>
+                <button class="gray buttons" id="eight">8</button>
+                <button class="gray buttons" id="nine">9</button>
+                <button class="orange buttons" id="multi">x</button>
+            </div>
+            
+            <div class="rows row-third">
+                <button class="gray buttons" id="four">4</button>
+                <button class="gray buttons" id="five">5</button>
+                <button class="gray buttons" id="six">6</button>
+                <button class="orange buttons" id="minus">-</button>
+            </div>
+            
+            <div class="rows row-four">
+                <button class="gray buttons" id="one">1</button>
+                <button class="gray buttons" id="two">2</button>
+                <button class="gray buttons" id="three">3</button>
+                <button class="orange buttons" id="plus">+</button>
+            </div>
+    
+            <div class="rows row-five">
+                <button class="gray buttons" id="zero">0</button>
+                <button class="orange buttons" id="equal">=</button>
+            </div>
         </div>
     </div>
 
-    <script src="/calculator/js/calculator.js"></script>
+    <script src="../js/calculator.js"></script>
 </body>
 </html>
