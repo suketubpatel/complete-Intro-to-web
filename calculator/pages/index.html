@@ -3,9 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
     <title>Calculator</title>
 </head>
 <body>
-    
+    <div class="calculator">
+        <div class="row-display">0</div>
+
+        <div class="rows row-first">
+            <button class="gray buttons clear">C</button>
+            <button class="gray buttons back">&larr;</button>
+            <button class="orange buttons divide">&#247</button>
+        </div>
+        
+        <div class="rows row-second">
+            <button class="gray buttons seven">7</button>
+            <button class="gray buttons eight">8</button>
+            <button class="gray buttons nine">9</button>
+            <button class="orange buttons multi">x</button>
+        </div>
+        
+        <div class="rows row-third">
+            <button class="gray buttons four">4</button>
+            <button class="gray buttons five">5</button>
+            <button class="gray buttons six">6</button>
+            <button class="orange buttons minus">-</button>
+        </div>
+        
+        <div class="rows row-four">
+            <button class="gray buttons one">1</button>
+            <button class="gray buttons two">2</button>
+            <button class="gray buttons three">3</button>
+            <button class="orange buttons plus">+</button>
+        </div>
+
+        <div class="rows row-five">
+            <button class="gray buttons zero">0</button>
+            <button class="orange buttons equal">=</button>
+        </div>
+    </div>
+
+    <script src="/calculator/js/calculator.js"></script>
 </body>
 </html>
