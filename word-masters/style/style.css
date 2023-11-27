@@ -2,14 +2,61 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    text-align: center;
+}
+
+header{
+    text-align: center;
+    border-bottom: solid 3px black;
+    margin-bottom: 20px;
+}
+
+.info-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.scoreboard {
+    margin: auto;
+    justify-self: center;
+    padding: 20px;
+    width: 400px;
+}
+
 .scoreboard-letter {
-    width: 50px;
-    height: 50px;
-    border: solid 2px black;
+    width: 60px;
+    height: 60px;
     border-radius: 100%;
+    margin: 10px 0;
+    box-shadow: 2px 2px 4px #000000;
+    /*box-shadow: 2px 2px 4px #000000 inset;*/
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0;
 }
 
 .row {
     display: flex;
-    justify-content: space-around 20%;
+    justify-content: space-between;
+}
+
+.btn-container {
+    margin: 20px 0;
+}
+
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spiner {
+    animation: spin 0.5s infinite linear;
 }
