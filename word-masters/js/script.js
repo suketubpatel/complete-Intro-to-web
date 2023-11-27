@@ -1,8 +1,10 @@
 let word;
-let keystrock = 0;
 let currentLetter = 0;
+let keyStrock = 0;
+let lastRowLetter = 0;
 let currentWord = "";
-let wordArray = [];
+let letterArray = [];
+let displayLetter;
 
 const rows = 6, columns = 5;
 
@@ -10,41 +12,64 @@ const logo = document.querySelector(".hidden");         // spining object div
 
 
 function keyPress(value){
-    let displayLetter;
-    let isLetter = checkLetter(value);
     
-    if (value == "Enter") {
+    let isLetter = checkLetter(value);
 
-        //console.log("Enter");
-
-    } else if (value == "Backspace" && currentLetter > 0) {
-        currentLetter--;
-        displayLetter  = document.querySelector(`#letter-${currentLetter}`);
-
-        displayLetter.innerText = "";
-        displayLetter.style.boxShadow = "2px 2px 4px #000000";
-        displayLetter.style.backgroundColor = "#FFFFFF";
-
-        currentWord = currentWord.substring(0, currentWord.length - 1);
-
-    } else if (isLetter && currentLetter < 30) {
-
-        displayLetter  = document.querySelector(`#letter-${currentLetter}`);
-
-        displayLetter.innerText = value.toUpperCase();
-        displayLetter.style.boxShadow = "2px 2px 4px #000000 inset";
-        displayLetter.style.backgroundColor = "#F0F8FF";
-        currentLetter++;
-
-        currentWord += value;
-    } 
-    //console.log(`currentLetter: ${currentLetter}`);
-    // 25 % 5;
-
-    console.log(currentWord);
+    //console.log(keyStrock);
+    if (keyStrock == 5) {                       // if at the end of each row
+        
+        if (value == "Enter") {                 // if user has pressed enter
+            if (matched = matchWord()) {        // match the word
+                lastRowLetter = currentLetter;
+                keyStrock = 0;
+            }
+        } else if (value == "Backspace") {      // only backspace allowed
+            backSpace();
+        } else {
+            return;
+        }
+        
+    } else if (value == "Backspace" && currentLetter > lastRowLetter) {         // delete last letter
+        backSpace();
+    } else if (isLetter && currentLetter < 30) {                                // write letter
+        addLetter(value);
+    }
 }
 
+function matchWord(){
+    console.log(currentWord);
+    for (let i = 0; i < letterArray.length; i++) {
+        console.log(`${i}: ${letterArray[i]}`);
+    }
+    currentWord = "";
+    return true;
+}
 
+function backSpace() {
+    currentLetter--;
+    keyStrock--;
+    displayLetter  = document.querySelector(`#letter-${currentLetter}`);
+
+    displayLetter.innerText = "";
+    displayLetter.style.boxShadow = "2px 2px 4px #000000";
+    displayLetter.style.backgroundColor = "#FFFFFF";
+
+    currentWord = currentWord.substring(0, currentWord.length - 1);
+    letterArray.pop();
+}
+
+function addLetter(value) {
+    displayLetter  = document.querySelector(`#letter-${currentLetter}`);
+
+    displayLetter.innerText = value.toUpperCase();
+    displayLetter.style.boxShadow = "2px 2px 4px #000000 inset";
+    displayLetter.style.backgroundColor = "#F0F8FF";
+    currentLetter++;
+    keyStrock++;
+
+    currentWord += value;
+    letterArray.push(value);
+}
 
 function checkLetter(letter) {
     return /^[a-zA-ZEnter]$/.test(letter);
