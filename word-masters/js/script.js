@@ -46,8 +46,10 @@ let currentRow;
         logo.style.visibility = "hidden";       // hide spining object
             
 
-    function keyPress(value){
+    async function keyPress(value){
         
+        logo.style.visibility = "display";      // display spining object
+
         console.log(`current row num: ${currentRowNum}`);
 
         let isLetter = checkLetter(value);
@@ -64,11 +66,61 @@ let currentRow;
                 currentRow = document.querySelector(".row-" + currentRowNum);     // css to current row
 
                 if (!matchWord()) {        // matched the word
-                    lastRowLetter = currentLetter;
-                    keyStrock = 0;
-                    currentWord = "";
+                    
+                    const res = await fetch("https://words.dev-apis.com/validate-word", {
+                        method: "POST",
+                        body: JSON.stringify({word: currentWord}),
+                    });
+                    let responce = await res.json();
+
+
+                    let isValidWord = responce.validWord;       // read the validword value
+
+                    if(isValidWord) {
+                        let storage = [];
+
+                        console.log(`currentLetter: ${currentLetter}`);
+
+                        for (let i = 0; i < word.length; i++) {
+                            const char = word[i];       // get current charecter from word
+
+                            if(currentWord.includes(char)) {
+                                console.log("i: " + i);
+                                storage.push([currentWord.indexOf(char), char]);
+                            }
+                        }
+
+                        for (let i = 0; i < storage.length; i++) {
+                            console.log(storage[i][0] + " " + storage[i][1]);
+                            const char = currentWord[i];
+
+                            let letter;
+                            if (char == storage[i][1]) {
+                                letter = document.querySelector("#letter-" + ((currentLetter - 5) + i));
+                                letter.style.backgroundColor = "orange";
+                            } else {
+                                letter = document
+                                    .querySelector("#letter-" + ((currentLetter - 5) + storage[i][0]));
+                                letter.style.backgroundColor = "gray";
+                            }
+                        }
+
+                        if(currentRowNum == 6) {
+                            alert("Oops! You lost the game.");
+                            btn.style.visibility = "visible";
+                        }
+                        // allow to re-enter into current row following two statements
+                        lastRowLetter = currentLetter;
+                        keyStrock = 0;
+                    } else {
+                        return;     // do nothing
+                    }
+
+                    currentWord = "";       // clear the current word
 
                     currentRowNum++;        // increase the number of current row
+
+                    
                     return;
                 } else {
                     
@@ -81,8 +133,9 @@ let currentRow;
                             letter.style.color = "white";
                         }
                     }
-                    btn.style.visibility = "visible";
                     
+                    alert("Congratulations! You won the game.");
+                    btn.style.visibility = "visible";
                     return;
                 }
             } else if (value == "Backspace") {      // only backspace allowed
@@ -97,8 +150,10 @@ let currentRow;
             addLetter(value);
         }
         
+        logo.style.visibility = "hidden";       // hide spining object
     }
 
+    
     function matchWord(){
         if (currentWord == word){        // if matched return true
             currentWord = "";
@@ -139,3 +194,8 @@ let currentRow;
 }
 
 init();                     // run javascrip
+
+function playAgain(){       // replay the game
+    console.log("Clicked");
+    location.reload(true);
+}
