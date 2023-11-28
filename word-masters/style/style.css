@@ -50,6 +50,19 @@ header{
     margin: 20px 0;
 }
 
+.gray {
+    background-color: gray;
+    color: white;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
 
 @keyframes spin {
     to {

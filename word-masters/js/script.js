@@ -19,9 +19,13 @@ function keyPress(value){
     if (keyStrock == 5) {                       // if at the end of each row
         
         if (value == "Enter") {                 // if user has pressed enter
+            console.log(currentLetter);
+            console.log(keyStrock);
             if (matched = matchWord()) {        // match the word
                 lastRowLetter = currentLetter;
                 keyStrock = 0;
+            } else {
+                return;
             }
         } else if (value == "Backspace") {      // only backspace allowed
             backSpace();
@@ -40,6 +44,8 @@ function matchWord(){
     console.log(currentWord);
     for (let i = 0; i < letterArray.length; i++) {
         console.log(`${i}: ${letterArray[i]}`);
+        //let block = document.querySelector("#letter-" + i);
+        //block.style.backgroundColor = "green";
     }
     currentWord = "";
     return true;
