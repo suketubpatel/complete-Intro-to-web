@@ -1,6 +1,8 @@
 const rows = 6, columns = 5;
 const logo = document.querySelector(".hidden");         // spining object div
-const btn = document.querySelector(".btn-container");      // button to play again
+const btnContainer = document.querySelector(".btn-container");      // button container to play again
+const btn = document.querySelector(".btn");
+const header = document.querySelector("#heading");
 
 
 async function init() {           // read key strok from keyboard on body element
@@ -35,23 +37,19 @@ let currentRow;
         word = word_of_the_day;
         console.log(word);
         */
-        word = "slick";
-        console.log(word);
-        /*
+        
         // fetch daily word
         const promise = await fetch(word_of_the_day_random_url);
         const promiseResponse = await promise.json();
         word_of_the_day_random = promiseResponse.word;
         word = word_of_the_day_random;
-        console.log(word);
-        */
+        //console.log(word);
+        
 
         logo.style.visibility = "hidden";       // hide spining object
             
 
     async function keyPress(value){
-        
-        logo.style.visibility = "display";      // display spining object
 
         //console.log(`current row num: ${currentRowNum}`);
 
@@ -62,7 +60,7 @@ let currentRow;
             
             if (value == "Enter") {                 // if user has pressed enter
                 
-                console.log(currentWord);
+                //console.log(currentWord);
                 //console.log(`current row num: ${currentRowNum}`);
                 //console.log(".row-" + currentRowNum + " > *");
 
@@ -85,62 +83,31 @@ let currentRow;
                         storage = findChars(word, currentWord);     // check for common characters
 
                         //console.log(`currentLetter: ${currentLetter}`);
-                        /*
-                        for (let i = 0; i < word.length; i++) {
-                            const char = word[i];       // get current charecter from word
-
-                            if(currentWord.includes(char)) {
-                                //console.log("i: " + i);
-                                storage.push([currentWord.indexOf(char), char]);
-                            }
-                        }
-                        */
-                        console.log(`storage length ${storage.length}`);
-                        console.log(`storage array: ${storage}`);
+                        
+                        //console.log(`storage length ${storage.length}`);
+                        //console.log(`storage array: ${storage}`);
                         colorChars(word, storage);           // Color the charecters
-                        /*
-                        for (let i = 0; i < storage.length; i++) {
-                            console.log(storage[i][0] + " " + storage[i][1]);
-                            const char = currentWord[i];
-                            
-                            let letter;
-                            if (char == storage[i][1]) {
-                                letter = document.querySelector("#letter-" + ((currentLetter - 5) + i));
-                                letter.style.backgroundColor = "orange";
-                            } else {
-                                letter = document
-                                    .querySelector("#letter-" + ((currentLetter - 5) + storage[i][0]));
-                                letter.style.backgroundColor = "gray";
-                            }
-                            
-                            //if (char == storage[i][1]) {
-                            //    letter = document.querySelector("#letter-" + ((currentLetter - 5) + i));
-                            //    letter.style.backgroundColor = "orange";
-                            //} else {
-                            //    letter = document
-                            //        .querySelector("#letter-" + ((currentLetter - 5) + storage[i][0]));
-                            //    letter.style.backgroundColor = "gray";
-                            //}
-                            
-                        }*/
-
+                        
                         // do some css here *********************************
                         if(currentRowNum == 6) {
-                            alert("Oops! You lost the game.");
-                            btn.style.visibility = "visible";
+                            header.innerHTML = "Oops! You lost the game";
+                            header.classList.add("lost");
+                            btn.style.backgroundColor = "red";
+                            btnContainer.style.visibility = "visible";
                         }
                         // allow to re-enter into current row following two statements
                         lastRowLetter = currentLetter;
                         keyStrock = 0;
                     } else {
+                        // do some css here for wrong  *****************************
+                        makeWrongStyle();
+                        
                         return;     // do nothing
                     }
 
                     currentWord = "";       // clear the current word
-
                     currentRowNum++;        // increase the number of current row
 
-                    
                     return;
                 } else {
                     
@@ -155,8 +122,10 @@ let currentRow;
                     }
                     
                     // do some css here *************************************
-                    alert("Congratulations! You won the game.");
-                    btn.style.visibility = "visible";
+                    //alert("Congratulations! You won the game.");
+                    header.innerHTML = "Congratulations! You won the game";
+                    header.classList.add("won");
+                    btnContainer.style.visibility = "visible";
                     return;
                 }
             } else if (value == "Backspace") {      // only backspace allowed
@@ -171,7 +140,25 @@ let currentRow;
             addLetter(value);
         }
         
-        logo.style.visibility = "hidden";       // hide spining object
+    }
+
+    function makeWrongStyle() {             // css style to show wrong word
+        for(let i = currentLetter - 1; i >= (currentLetter - 5); i--){
+            let letter = document.querySelector("#letter-" + i);
+            
+            letter.classList.add("wrong");
+        }
+    }
+
+    function removeWrongStyle() {           // remove css style for wrong word if exists
+        for(let i = currentLetter - 1; i >= (currentLetter - 5); i--){
+            let letter = document.querySelector("#letter-" + i);
+            
+            if (letter.classList.contains("wrong"))
+                letter.classList.remove("wrong");
+            else
+                return;
+        }
     }
 
     function colorChars(str, arr) {             // colour the charectors accordingly
@@ -194,9 +181,9 @@ let currentRow;
             // 
             for (let j = 0; j < leftLocations.length; j++) {
                 //console.log(`j: ${j}`);
-                console.log(`leftLocation: ${leftLocations[j]}`);
+                //console.log(`leftLocation: ${leftLocations[j]}`);
                 if(leftLocations[j] === arrIndex) {
-                    console.log(`Deleting: ${j}`);
+                    //console.log(`Deleting: ${j}`);
                     delete leftLocations[j];
                     //spliceArray = leftLocations.splice(j);
                 } 
@@ -211,7 +198,7 @@ let currentRow;
         
         for (let i = 0; i < leftLocations.length; i++) {    // 
             if (leftLocations[i] === i) {
-                console.log(`toGray: ${i}`);
+                //console.log(`toGray: ${i}`);
                 let letter = document           // if char is in string but wrong position make it orange
                     .querySelector("#letter-" + ((currentLetter - 5) + i));
                 letter.style.backgroundColor = "gray";
@@ -247,6 +234,8 @@ let currentRow;
     }
 
     function backSpace() {
+        removeWrongStyle();             // remove wrong color style if exists
+
         currentLetter--;
         keyStrock--;
         displayLetter  = document.querySelector(`#letter-${currentLetter}`);
