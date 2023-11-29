@@ -77,6 +77,18 @@ header{
     color: rgb(4, 173, 4);
 }
 
+p {
+    color: rgb(4, 173, 4);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+span {
+    font-size: 30px;
+    color: rgb(248, 135, 5);
+    font-weight: 700;
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);

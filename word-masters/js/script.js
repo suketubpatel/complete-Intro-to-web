@@ -3,6 +3,7 @@ const logo = document.querySelector(".hidden");         // spining object div
 const btnContainer = document.querySelector(".btn-container");      // button container to play again
 const btn = document.querySelector(".btn");
 const header = document.querySelector("#heading");
+const head = document.querySelector("#head");
 
 
 async function init() {           // read key strok from keyboard on body element
@@ -93,6 +94,21 @@ let currentRow;
                             header.innerHTML = "Oops! You lost the game";
                             header.classList.add("lost");
                             btn.style.backgroundColor = "red";
+
+                            const span = document.createElement("span");
+                            const spanText = word;
+                            const spanContent = document.createTextNode(spanText);
+                            span.appendChild(spanContent);
+
+                            console.log(span);
+                            
+                            const p = document.createElement("p");
+                            const message = "The correct answer was - ";
+                            const content = document.createTextNode(message);
+                            p.appendChild(content);
+                            p.appendChild(span);
+                            head.appendChild(p);
+
                             btnContainer.style.visibility = "visible";
                         }
                         // allow to re-enter into current row following two statements
