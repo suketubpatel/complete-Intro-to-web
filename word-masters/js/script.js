@@ -27,13 +27,16 @@ let currentRow;
 
         logo.style.visibility = "display";      // display spining object
 
+        /*
         // fetch daily word
         const promise = await fetch(word_of_the_day_url);
         const promiseResponse = await promise.json();
         word_of_the_day = promiseResponse.word;
         word = word_of_the_day;
         console.log(word);
-
+        */
+        word = "slick";
+        console.log(word);
         /*
         // fetch daily word
         const promise = await fetch(word_of_the_day_random_url);
@@ -50,7 +53,7 @@ let currentRow;
         
         logo.style.visibility = "display";      // display spining object
 
-        console.log(`current row num: ${currentRowNum}`);
+        //console.log(`current row num: ${currentRowNum}`);
 
         let isLetter = checkLetter(value);
 
@@ -60,8 +63,8 @@ let currentRow;
             if (value == "Enter") {                 // if user has pressed enter
                 
                 console.log(currentWord);
-                console.log(`current row num: ${currentRowNum}`);
-                console.log(".row-" + currentRowNum + " > *");
+                //console.log(`current row num: ${currentRowNum}`);
+                //console.log(".row-" + currentRowNum + " > *");
 
                 currentRow = document.querySelector(".row-" + currentRowNum);     // css to current row
 
@@ -77,23 +80,29 @@ let currentRow;
                     let isValidWord = responce.validWord;       // read the validword value
 
                     if(isValidWord) {
+                        
                         let storage = [];
+                        storage = findChars(word, currentWord);     // check for common characters
 
-                        console.log(`currentLetter: ${currentLetter}`);
-
+                        //console.log(`currentLetter: ${currentLetter}`);
+                        /*
                         for (let i = 0; i < word.length; i++) {
                             const char = word[i];       // get current charecter from word
 
                             if(currentWord.includes(char)) {
-                                console.log("i: " + i);
+                                //console.log("i: " + i);
                                 storage.push([currentWord.indexOf(char), char]);
                             }
                         }
-
+                        */
+                        console.log(`storage length ${storage.length}`);
+                        console.log(`storage array: ${storage}`);
+                        colorChars(word, storage);           // Color the charecters
+                        /*
                         for (let i = 0; i < storage.length; i++) {
                             console.log(storage[i][0] + " " + storage[i][1]);
                             const char = currentWord[i];
-
+                            
                             let letter;
                             if (char == storage[i][1]) {
                                 letter = document.querySelector("#letter-" + ((currentLetter - 5) + i));
@@ -103,8 +112,19 @@ let currentRow;
                                     .querySelector("#letter-" + ((currentLetter - 5) + storage[i][0]));
                                 letter.style.backgroundColor = "gray";
                             }
-                        }
+                            
+                            //if (char == storage[i][1]) {
+                            //    letter = document.querySelector("#letter-" + ((currentLetter - 5) + i));
+                            //    letter.style.backgroundColor = "orange";
+                            //} else {
+                            //    letter = document
+                            //        .querySelector("#letter-" + ((currentLetter - 5) + storage[i][0]));
+                            //    letter.style.backgroundColor = "gray";
+                            //}
+                            
+                        }*/
 
+                        // do some css here *********************************
                         if(currentRowNum == 6) {
                             alert("Oops! You lost the game.");
                             btn.style.visibility = "visible";
@@ -134,6 +154,7 @@ let currentRow;
                         }
                     }
                     
+                    // do some css here *************************************
                     alert("Congratulations! You won the game.");
                     btn.style.visibility = "visible";
                     return;
@@ -153,7 +174,70 @@ let currentRow;
         logo.style.visibility = "hidden";       // hide spining object
     }
 
-    
+    function colorChars(str, arr) {             // colour the charectors accordingly
+        let letter;
+        let leftLocations = [0,1,2,3,4];
+
+        for (let i = 0; i < arr.length; i++) {
+            let arrIndex = arr[i][0];       
+            let arrChar = arr[i][1];
+
+            if (str.charAt(arrIndex) === arrChar) {         // if char at right position make it green
+                letter = document.querySelector("#letter-" + ((currentLetter - 5) + arrIndex));
+                letter.style.backgroundColor = "green";
+            } else {
+                letter = document           // if char is in string but wrong position make it orange
+                    .querySelector("#letter-" + ((currentLetter - 5) + arrIndex));
+                letter.style.backgroundColor = "orange";
+            }
+            
+            // 
+            for (let j = 0; j < leftLocations.length; j++) {
+                //console.log(`j: ${j}`);
+                console.log(`leftLocation: ${leftLocations[j]}`);
+                if(leftLocations[j] === arrIndex) {
+                    console.log(`Deleting: ${j}`);
+                    delete leftLocations[j];
+                    //spliceArray = leftLocations.splice(j);
+                } 
+            }
+        }
+
+        colorGray(leftLocations);       // Make color Gray the charechter icons
+       
+    }
+
+    function colorGray(leftLocations) {     
+        
+        for (let i = 0; i < leftLocations.length; i++) {    // 
+            if (leftLocations[i] === i) {
+                console.log(`toGray: ${i}`);
+                let letter = document           // if char is in string but wrong position make it orange
+                    .querySelector("#letter-" + ((currentLetter - 5) + i));
+                letter.style.backgroundColor = "gray";
+            }
+        }
+
+    }
+    function findChars(str1, str2) {        // find common charecters in both string with location
+        
+        let chars = [];
+        let commonChars = "";
+
+        for(let i = 0; i < str1.length; i++) {
+            if (commonChars.indexOf(str1[i]) === -1) {      // current word char is not in commonChar
+                for (let j = 0; j < str2.length; j++) {
+                    if (str2.substring(j, j + 1) == str1[i]) {
+                        chars.push([j, str2[j]]);
+                        commonChars += str2[j];
+                    }
+                }
+            }
+        }
+
+        return chars;
+    }
+
     function matchWord(){
         if (currentWord == word){        // if matched return true
             currentWord = "";
