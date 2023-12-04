@@ -28,7 +28,7 @@ let currentRow;
     const word_of_the_day_url = "https://words.dev-apis.com/word-of-the-day";
     const word_of_the_day_random_url = "https://words.dev-apis.com/word-of-the-day?random=1";
 
-        logo.style.visibility = "display";      // display spining object
+        //logo.style.visibility = "display";      // display spining object
 
         /*
         // fetch daily word
@@ -44,7 +44,7 @@ let currentRow;
         const promiseResponse = await promise.json();
         word_of_the_day_random = promiseResponse.word;
         word = word_of_the_day_random;
-        //console.log(word);
+        console.log(word);
         
 
         logo.style.visibility = "hidden";       // hide spining object
