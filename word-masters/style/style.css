@@ -96,5 +96,6 @@ span {
 }
 
 .spiner {
-    animation: spin 0.5s infinite linear;
+    animation: spin 1.5s infinite linear;
+    font-size: 40px;
 }
